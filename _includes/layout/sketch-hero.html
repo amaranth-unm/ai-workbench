@@ -1,0 +1,23 @@
+{% comment %}
+  Sketch hero — full-width image header with the page title overlaid, for
+  individual teaching and policy sketches that have a `thumbnail`. The layout
+  renders it automatically; content files don't include it directly. When it
+  shows, the body gets .has-sketch-hero, which hides the in-content H1 and its
+  section accent (the hero carries the title instead).
+
+  Reads: page.thumbnail, page['thumbnail-credit'], page['thumbnail-position'], page.title, page.dir
+  Parameters: none.
+
+  Usage (in the layout, before the content container):
+    {% include layout/sketch-hero.html %}
+{% endcomment %}
+{% capture hero_src %}{% include images/image-path.html image-path=page.thumbnail %}{% endcapture %}
+{% if page.dir == "/policy/" %}{% assign hero_section = "policy" %}{% else %}{% assign hero_section = "teach" %}{% endif %}
+{% assign hero_alt = page['thumbnail-credit'] | default: '' | markdownify | strip_html | strip %}
+<header class="sketch-hero sketch-hero--{{ hero_section }}">
+  <img class="sketch-hero-img" src="{{ hero_src | strip }}" alt="{{ hero_alt | escape }}"{% if page['thumbnail-position'] %} style="object-position: {{ page['thumbnail-position'] }};"{% endif %}>
+  <div class="sketch-hero-inner">
+    <h1 class="sketch-hero-title">{{ page.title }}</h1>
+    {% if page['thumbnail-credit'] %}<p class="sketch-hero-credit">{{ page['thumbnail-credit'] | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>{% endif %}
+  </div>
+</header>

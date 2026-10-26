@@ -1,0 +1,31 @@
+{% comment %}
+  Sketch license — "Using This Experiment" box with license terms, a suggested
+  citation, and a print button. Renders only on individual
+  research/ sketch pages (not index pages).
+
+  Reads: page['thumbnail-credit'], page.author (name before the first comma; the department after it is dropped), page.title, page.date, page.url, site.title, site.url, site.baseurl
+  The print button is wired up in assets/js/nav.js via [data-print].
+
+  Usage (in the layout, after the page content):
+    {% include layout/sketch-license.html %}
+{% endcomment %}
+
+{% assign is_sketch_page = false %}
+{% if page.name != "index.md" %}
+  {% if page.dir == "/research/" %}
+    {% assign is_sketch_page = true %}
+  {% endif %}
+{% endif %}
+
+{% if is_sketch_page %}
+<section class="sketch-license" aria-label="Using this experiment">
+  <div class="sketch-license-header">
+    <h2 class="sketch-aside-heading">Using This Experiment</h2>
+    <button type="button" class="sketch-print-button" data-print>Print</button>
+  </div>
+  <p>This experiment is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0</a>. You're welcome to share and adapt it for noncommercial purposes, with credit, as long as you share your adaptation under the same license.</p>
+  {% if page['thumbnail-credit'] %}<p class="sketch-license-image"><span class="sketch-license-label">Image</span> {{ page['thumbnail-credit'] | markdownify | remove: '<p>' | remove: '</p>' | strip }} The image's own license applies to it, separately from the sketch.</p>{% endif %}
+  <p class="sketch-license-label">Suggested citation</p>
+  <p class="sketch-citation">{% if page.author %}{{ page.author | split: "," | first | strip }}. {% endif %}"{{ page.title }}." <em>{{ site.title }}</em>, Amaranth, University of New Mexico{% if page.date %}, {{ page.date | date: "%B %-d, %Y" }}{% endif %}. {{ site.url }}{{ site.baseurl }}{{ page.url }}. Licensed under CC BY-NC-SA 4.0.</p>
+</section>
+{% endif %}

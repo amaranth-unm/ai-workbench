@@ -1,0 +1,6 @@
+title: AI Workbench
+description: "Experiments with AI in humanities research at UNM: sources, tools, methods, and writing."
+baseurl: /ai-workbench
+url: https://amaranth.unm.edu
+search: true
+repository: amaranth-unm/ai-workbench

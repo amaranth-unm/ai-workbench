@@ -1,0 +1,12 @@
+---
+layout: null
+permalink: /assets/search-index.json
+---
+[{% assign first = true %}{% for page in site.pages %}{% if page.title and page.layout == 'sketchbook' and page.url != '/tags/' %}{% unless first %},{% endunless %}{% assign first = false %}
+{
+  "url": "{{ site.baseurl }}{{ page.url | remove: 'index.html' }}",
+  "title": {{ page.title | jsonify }},
+  "summary": {{ page.summary | default: page.description | default: "" | jsonify }},
+  "tags": {{ page.tags | default: "" | join: " " | jsonify }},
+  "content": {{ page.content | strip_html | strip_newlines | truncate: 5000 | jsonify }}
+}{% endif %}{% endfor %}]

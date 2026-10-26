@@ -1,0 +1,49 @@
+{% comment %}
+  Home Tag Cloud
+
+  Every tag in use across listed sketches in the selected sections, rendered as
+  badges that deep-link into the /tags/ browser. The point is range, not
+  counts — it shows a reader at a glance what kinds of topics are here.
+
+  The heading belongs to the calling page (an `##` in index.md), not to this
+  include — the include renders only the badges.
+
+  Usage:
+    {% include nav/home-tag-cloud.html %}
+
+  Parameters:
+    - sections: comma-separated folder list; defaults to "/research/".
+      Example: {% include nav/home-tag-cloud.html sections="/research/" %}
+{% endcomment %}
+
+{% comment %} Sections the cloud draws from — add a folder here to include it. {% endcomment %}
+{% assign tag_sections = include.sections | default: "/research/" | split: "," %}
+
+{% assign tagged_pages = "" | split: "" %}
+{% for section_dir in tag_sections %}
+  {% assign section_tagged = site.pages
+    | where: "dir", section_dir
+    | where_exp: "item", "item.name != 'index.md'"
+    | where_exp: "item", "item.listed != false"
+    | where_exp: "item", "item.tags.size > 0" %}
+  {% assign tagged_pages = tagged_pages | concat: section_tagged %}
+{% endfor %}
+
+{% assign home_tags = "" | split: "" %}
+{% for item in tagged_pages %}
+  {% for tag in item.tags %}
+    {% assign home_tags = home_tags | push: tag %}
+  {% endfor %}
+{% endfor %}
+{% assign home_tags = home_tags | uniq | sort_natural %}
+
+{% if home_tags.size > 0 %}
+<div class="home-tag-cloud">
+  <div class="sketchbook-tag-list home-tag-cloud__list">
+    {% for tag in home_tags %}
+    <a class="sketchbook-tag-badge" href="{{ '/tags/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a>
+    {% endfor %}
+    <a class="sketchbook-tag-badge home-tag-cloud__all" href="{{ '/tags/' | relative_url }}">Browse all tags →</a>
+  </div>
+</div>
+{% endif %}

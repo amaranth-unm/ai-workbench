@@ -1,0 +1,57 @@
+{% comment %}
+  Sketch Pagination
+
+  Renders previous / all tags / next buttons for individual sketch pages.
+  Pages are ordered by card_order within their section folder.
+{% endcomment %}
+
+{% assign is_sketch_page = false %}
+{% if page.name != "index.md" %}
+  {% if page.dir == "/teaching/" or page.dir == "/policy/" or page.dir == "/research/" %}
+    {% assign is_sketch_page = true %}
+  {% endif %}
+{% endif %}
+
+{% if is_sketch_page %}
+  {% assign section_pages = site.pages
+    | where_exp: "item", "item.dir == page.dir"
+    | where_exp: "item", "item.name != 'index.md'"
+    | where_exp: "item", "item.listed != false"
+    | sort: "card_order" %}
+
+  {% assign previous_index = nil %}
+  {% assign next_index = nil %}
+  {% for item in section_pages %}
+    {% if item.url == page.url %}
+      {% assign previous_index = forloop.index0 | minus: 1 %}
+      {% assign next_index = forloop.index0 | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign previous_page = nil %}
+  {% assign next_page = nil %}
+  {% for item in section_pages %}
+    {% if forloop.index0 == previous_index %}
+      {% assign previous_page = item %}
+    {% endif %}
+    {% if forloop.index0 == next_index %}
+      {% assign next_page = item %}
+    {% endif %}
+  {% endfor %}
+
+  <nav class="sketch-bottom-nav" aria-label="Sketch navigation">
+    {% if previous_page %}
+      <a class="tag-browse-button sketch-bottom-nav-button" href="{{ previous_page.url | relative_url }}">← {{ previous_page.title }}</a>
+    {% else %}
+      <span class="tag-browse-button sketch-bottom-nav-button sketch-bottom-nav-button--disabled" aria-hidden="true">← Previous sketch</span>
+    {% endif %}
+
+    <a class="tag-browse-button sketch-bottom-nav-button sketch-bottom-nav-button--tags" href="{{ '/tags/' | relative_url }}">Browse all tags</a>
+
+    {% if next_page %}
+      <a class="tag-browse-button sketch-bottom-nav-button" href="{{ next_page.url | relative_url }}">{{ next_page.title }} →</a>
+    {% else %}
+      <span class="tag-browse-button sketch-bottom-nav-button sketch-bottom-nav-button--disabled" aria-hidden="true">Next sketch →</span>
+    {% endif %}
+  </nav>
+{% endif %}

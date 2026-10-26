@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
+  {% include html/html-head.html %}
+
+  {% assign show_sketch_hero = false %}
+  {% if page.thumbnail and page.name != "index.md" and page.header-image == nil %}
+    {% if page.dir == "/teaching/" or page.dir == "/policy/" %}{% assign show_sketch_hero = true %}{% endif %}
+  {% endif %}
+
+  <body class="sketchbook-shell{% if show_sketch_hero %} has-sketch-hero{% endif %}{% if page.body-class %} {{ page.body-class }}{% endif %}">
+
+    {% include nav/nav-top.html %}
+
+    {% if show_sketch_hero %}{% include layout/sketch-hero.html %}{% endif %}
+
+    {% assign headerimage = page.header-image %}
+    {% assign headertitle = page.header-title %}
+    {% assign headersubtitle = page.header-subtitle %}
+    {% assign headerheight = page.header-height %}
+    {% assign headerposition = page.header-position %}
+
+    {% if headerimage %}
+
+      {% include layout/page-header.html
+        image-path = headerimage
+        title = headertitle
+        subtitle = headersubtitle
+        eyebrow = page.header-eyebrow
+        divider = page.header-divider
+        height = headerheight
+        tier = page.header-tier
+        bg-position = headerposition
+        bg-opacity = page.header-opacity
+        zoom = page.header-zoom
+      %}
+
+    {% endif %}
+
+    {% assign container_class = page.container-class | default: 'container sketchbook-container' %}
+    {% if page.wide %}
+      <div class="{{ container_class }}">
+        {{ content }}
+        {% include layout/sketch-license.html %}
+        {% include nav/sketch-pagination.html %}
+      </div>
+    {% elsif page.scrollspy %}
+      <div class="{{ container_class }} sketchbook-container--scrollspy">
+        <div class="scrollspy-wrapper">
+          <div class="scrollspy-content">
+            {{ content }}
+            {% include layout/sketch-license.html %}
+            {% include nav/sketch-pagination.html %}
+          </div>
+          {% include nav/scrollspy.html %}
+        </div>
+      </div>
+    {% else %}
+      <div class="{{ container_class }} sketchbook-container--narrow">
+        {{ content }}
+        {% include layout/sketch-license.html %}
+        {% include nav/sketch-pagination.html %}
+      </div>
+    {% endif %}
+    {% include nav/search.html %}
+    {% include html/html-js.html %}
+
+    {% unless page.hide-footer %}
+      {% include layout/footer.html %}
+    {% endunless %}
+
+  </body>
+</html>

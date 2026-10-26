@@ -1,0 +1,29 @@
+{% comment %}
+  Card Image — shared by card-grid.html and card-stack.html
+
+  Parameters:
+    - card:  the page/card object (supplies .thumbnail, .thumbnail-position, .thumbnail-zoom, .dir, .title)
+    - class: CSS class for the wrapper div — "card-img-top" (grid) or "card-img-left" (stack)
+
+  Front matter keys read from the card page:
+    - thumbnail:          path to image (required for image to appear)
+    - thumbnail-position: CSS object-position, e.g. "top", "center 30%" (default: center)
+    - thumbnail-zoom:     scale multiplier, e.g. "1.5" — zooms in while card window stays fixed (default: none)
+
+  The wrapper div carries the class (and thus the fixed dimensions from cards.css).
+  The img inside fills the wrapper 100%, so transform: scale() is clipped by the wrapper's overflow: hidden.
+{% endcomment %}
+
+{% capture card_image_url %}{% include images/image-path.html image-path=include.card.thumbnail page-dir=include.card.dir %}{% endcapture %}
+{% assign image_class = "card-image-media" %}
+{% if include.card.thumbnail-position == "10% 50%" %}
+  {% assign image_class = image_class | append: " card-image-media--left" %}
+{% endif %}
+
+<div class="{{ include.class }}">
+  <img
+    src="{{ card_image_url | strip }}"
+    alt="{{ include.card.title | escape }}"
+    class="{{ image_class }}"
+  >
+</div>

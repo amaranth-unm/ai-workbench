@@ -1,0 +1,322 @@
+/* ─── Navbar ──────────────────────────────────────────────────────────────── */
+.navbar {
+  background-color: var(--terra);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+  box-shadow: none;
+}
+
+.navbar-sketchbook {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.navbar-sketchbook .container-fluid {
+  justify-content: flex-start;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.navbar-brand {
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.navbar-brand:hover {
+  color: var(--sunset);
+}
+
+.navbar-collapse {
+  display: flex;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.navbar-toggler {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.3rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.navbar-toggler-icon {
+  position: relative;
+  display: block;
+  width: 1.4rem;
+  height: 2px;
+  background: var(--white);
+  border-radius: 1px;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1.4rem;
+  height: 2px;
+  background: var(--white);
+  border-radius: 1px;
+}
+
+.navbar-toggler-icon::before { top: -6px; }
+.navbar-toggler-icon::after { top: 6px; }
+
+/* Override typography.css link styles inside the navbar */
+.navbar a,
+.navbar a:hover,
+.navbar a:focus,
+.navbar a:visited {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  white-space: normal;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--sunset);
+}
+
+button.nav-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.nav-item-search {
+  margin-left: 0.4rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+/* ─── Breadcrumb bar ──────────────────────────────────────────────────────── */
+.sketchbook-breadcrumb-bar {
+  background: rgba(237, 139, 0, 0.07);
+  border-bottom: 1px solid rgba(237, 139, 0, 0.18);
+  padding: 0.35rem 0;
+}
+
+.sketchbook-breadcrumb-inner {
+  max-width: 968px;
+  padding: 0 1rem;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.breadcrumb-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 0.25rem 0;
+}
+
+.breadcrumb-nav-list-item {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  line-height: 1;
+}
+
+.breadcrumb-nav-list-item + .breadcrumb-nav-list-item::before {
+  content: '/';
+  color: rgba(237, 139, 0, 0.35);
+  margin: 0 0.35rem;
+}
+
+.breadcrumb-nav-list-item a {
+  color: var(--sunset);
+  text-decoration: none;
+  opacity: 0.75;
+}
+
+.breadcrumb-nav-list-item a:hover {
+  opacity: 1;
+}
+
+.breadcrumb-nav-list-item[aria-current="page"] span {
+  color: rgba(237, 139, 0, 0.55);
+}
+
+
+/* ─── Scrollspy ──────────────────────────────────────────────────────────── */
+
+/* Hidden below 60rem; the breakpoint overrides live in the Responsive
+   section at the bottom of this file. */
+.scrollspy {
+  display: none;
+}
+
+.scrollspy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  position: relative;
+}
+
+/* Vertical rule behind the dots */
+.scrollspy-list::before {
+  content: "";
+  position: absolute;
+  right: 4px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--rule-gray);
+}
+
+.scrollspy-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.scrollspy-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted-gray);
+  white-space: nowrap;
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.scrollspy-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule-gray);
+  background: var(--white);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.scrollspy-item.active .scrollspy-dot {
+  background: var(--terra);
+  border-color: var(--terra);
+}
+
+.scrollspy-item.active .scrollspy-label {
+  color: var(--terra);
+}
+
+.scrollspy-link:hover .scrollspy-dot {
+  border-color: var(--dark-gray);
+}
+
+.scrollspy-link:hover .scrollspy-label {
+  color: var(--dark-gray);
+}
+
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar-sketchbook .container-fluid {
+    min-height: auto;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+
+  .navbar-toggler {
+    display: block;
+  }
+
+  .navbar-collapse {
+    display: none;
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .navbar-collapse.show {
+    display: flex;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 0.6rem;
+    gap: 0.2rem;
+  }
+
+  .nav-item-search {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 0.4rem;
+    margin-top: 0.2rem;
+  }
+
+  .breadcrumb-nav-list-item {
+    font-size: var(--text-label);
+  }
+}
+
+/* The scrollspy nav floats fixed to the viewport's top-right corner rather
+   than living in a layout column — it should stay put regardless of how
+   wide the centered content column is. */
+@media (min-width: 60rem) {
+  .scrollspy {
+    display: block;
+    position: fixed;
+    top: 5rem;
+    right: 2rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+  }
+}
+
+/* Slightly wider scrollspy labels at large screens, since there's more margin to use */
+@media (min-width: 80rem) {
+  .scrollspy-label {
+    max-width: 12rem;
+  }
+}

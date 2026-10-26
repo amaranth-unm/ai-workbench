@@ -1,0 +1,66 @@
+{% comment %}
+  Scrollspy — fixed vertical nav tracking h2 sections via Intersection Observer.
+  Enable with scrollspy: true in front matter. Skips h2.sketch-aside-heading
+  (the license and related-sketches boxes).
+{% endcomment %}
+
+<nav class="scrollspy" id="scrollspy" aria-label="Page sections" hidden>
+  <ul class="scrollspy-list" id="scrollspy-list"></ul>
+</nav>
+
+<script>
+(function () {
+  var nav      = document.getElementById('scrollspy');
+  var list     = document.getElementById('scrollspy-list');
+  var headings = Array.from(document.querySelectorAll('.sketchbook-container h2:not(.sketch-aside-heading)'));
+
+  if (headings.length < 2) return;
+
+  headings.forEach(function (h, i) {
+    if (!h.id) h.id = 'section-' + i;
+
+    var label = h.textContent.trim().replace(/^\d+\.\s*/, '');
+
+    var li   = document.createElement('li');
+    li.className       = 'scrollspy-item';
+    li.dataset.target  = h.id;
+
+    var a = document.createElement('a');
+    a.href      = '#' + h.id;
+    a.className = 'scrollspy-link';
+
+    var dot  = document.createElement('span');
+    dot.className = 'scrollspy-dot';
+
+    var txt  = document.createElement('span');
+    txt.className   = 'scrollspy-label';
+    txt.textContent = label;
+
+    a.appendChild(txt);
+    a.appendChild(dot);
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+
+  nav.hidden = false;
+
+  var itemMap = {};
+  Array.from(list.querySelectorAll('.scrollspy-item')).forEach(function (el) {
+    itemMap[el.dataset.target] = el;
+  });
+
+  var activeId = null;
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        if (activeId && itemMap[activeId]) itemMap[activeId].classList.remove('active');
+        activeId = entry.target.id;
+        if (itemMap[activeId]) itemMap[activeId].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+
+  headings.forEach(function (h) { observer.observe(h); });
+})();
+</script>

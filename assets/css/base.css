@@ -1,0 +1,118 @@
+/* ─── Reset ───────────────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+/* ─── Container grid ──────────────────────────────────────────────────────── */
+/*
+  Full-bleed CSS grid layout. Named column lines create two zones:
+    full:    spans the entire container (for section backgrounds, jumbotrons)
+    content: centered content column
+
+  All direct children default to the content column via .container > *.
+  Sketchbook variants override grid-template-columns to set content width.
+*/
+.container {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(1rem, 1fr)
+    [content-start] min(48rem, 100% - 2rem)
+    [content-end] minmax(1rem, 1fr)
+    [full-end];
+}
+
+.container > * {
+  grid-column: content;
+}
+
+
+/* ─── Body ────────────────────────────────────────────────────────────────── */
+body {
+  background-color: var(--white);
+  /* Subtle dot grid — digital graph-paper texture */
+  background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1.5px, transparent 0);
+  background-size: 22px 22px;
+  background-attachment: fixed;
+  color: var(--black);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-wrap: break-word;
+}
+
+
+/* ─── Bootstrap-free shim ────────────────────────────────────────────────── */
+/*
+ * Minimal replacements for the Bootstrap classes used in this site's
+ * templates (card-list.html, nav-top.html, index.md).
+ * No other Bootstrap CSS or JS is loaded.
+ */
+
+/* Nav */
+.navbar          { display: flex; flex-wrap: wrap; align-items: center; }
+.container-fluid { display: flex; align-items: center; width: 100%; padding: 0 1rem; flex-wrap: wrap; }
+.nav-item        { list-style: none; }
+
+/* Flex utilities */
+.d-flex              { display: flex !important; }
+.align-items-center  { align-items: center !important; }
+.align-items-stretch { align-items: stretch !important; }
+
+/* Grid row */
+.row  { display: flex; flex-wrap: wrap; }
+.g-0  { gap: 0; margin-left: 0; margin-right: 0; }
+
+/* Column widths — stacked by default, split at the sm breakpoint (576px+) */
+.col-sm-4,
+.col-sm-8,
+.col-sm-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 576px) {
+  .col-sm-4  { flex: 0 0 33.333%; max-width: 33.333%; }
+  .col-sm-8  { flex: 0 0 66.667%; max-width: 66.667%; }
+  .col-sm-12 { flex: 0 0 100%;    max-width: 100%; }
+}
+
+/* col-md-6: stacked on mobile, side-by-side at 768px+ */
+.col-md-6 { flex: 0 0 100%; max-width: 100%; }
+@media (min-width: 768px) {
+  .col-md-6 { flex: 0 0 50%; max-width: 50%; }
+}
+
+/* Image */
+.img-fluid { max-width: 100%; height: auto; }
+
+/* Stretched link — makes entire card clickable via absolute overlay */
+.stretched-link::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+}
+
+/* Spacing utilities */
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
+.py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+
+/* Ensure .card has position: relative so stretched-link overlay works */
+.card { position: relative; }

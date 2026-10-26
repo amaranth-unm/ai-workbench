@@ -1,0 +1,853 @@
+/* ─── Home section cards ─────────────────────────────────────────────────── */
+/*
+  Teaching / Research cards under the home page intro. Rendered by
+  nav/home-card-links.html. They run the full content width, side by side, so
+  the two places a reader can go next are the largest thing on the page after
+  the intro itself.
+*/
+.home-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.5rem;
+  margin: 1.75rem 0 1rem;   /* + the next h2's 2rem top margin (grid margins don't collapse) */
+}
+
+/* The section cards are the home page's main doorway, so they break out of
+   the reading column (centered, up to 68rem) to give them more presence. */
+.container > .home-sections {
+  grid-column: full-start / full-end;
+  justify-self: center;
+  width: min(68rem, 100% - 3rem);
+}
+
+.home-section-box {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--rule-gray);
+  border-top: 5px solid var(--rule-gray);
+  border-radius: 2px;
+  padding: 1.6rem 1.9rem 1.8rem;
+  text-decoration: none;
+  color: var(--black);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.home-section-box:hover {
+  border-color: var(--dark-gray);
+  box-shadow: var(--shadow-lg);
+  background: var(--white);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.home-section-box.teach    { border-top-color: var(--terra); }
+.home-section-box.policy   { border-top-color: var(--indigo); }
+.home-section-box.research { border-top-color: var(--turquoise); }
+
+.home-section-box__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-section-box__title {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(2.4rem, 3.6vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  transform: rotate(-1deg);
+  transform-origin: left center;
+}
+
+.home-section-box.teach    .home-section-box__title { color: var(--terra); }
+.home-section-box.policy   .home-section-box__title { color: var(--indigo); }
+.home-section-box.research .home-section-box__title { color: var(--turquoise); }
+
+.home-section-box__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-gray);
+  white-space: nowrap;
+}
+
+.home-section-box__text {
+  display: block;
+  color: var(--dark-gray);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+
+/* Reads as the card's call to action; the whole card is the link. */
+.home-section-box__go {
+  display: block;
+  margin-top: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-gray);
+  transition: color 0.15s ease;
+}
+
+.home-section-box.teach:hover    .home-section-box__go { color: var(--terra); }
+.home-section-box.policy:hover   .home-section-box__go { color: var(--indigo); }
+.home-section-box.research:hover .home-section-box__go { color: var(--turquoise); }
+
+
+/* ─── Home tag cloud ──────────────────────────────────────────────────────── */
+.home-tag-cloud {
+  margin: 0 0 2.5rem;
+}
+
+.home-tag-cloud__list {
+  margin: 0.4rem 0 0;
+}
+
+.home-tag-cloud__all {
+  border-color: rgba(192, 81, 49, 0.55);
+  color: var(--terra);
+}
+
+
+/* ─── Home sketch index ────────────────────────────────────────── */
+/*
+  One-line-per-sketch list at the foot of the home page, grouped by section.
+  Rendered by nav/home-sketch-index.html. Each group sets its own accent, so
+  adding a section means adding a class here and a folder in the include.
+*/
+.home-index {
+  margin: 0 0 2.5rem;
+}
+
+.home-index__group {
+  --home-index-accent: var(--terra);
+  margin-top: 1.6rem;
+}
+
+.home-index__group:first-child { margin-top: 0.4rem; }
+
+.home-index__group.research { --home-index-accent: var(--turquoise); }
+.home-index__group.policy   { --home-index-accent: var(--indigo); }
+
+.home-index__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid var(--home-index-accent);
+}
+
+.home-index__section {
+  font-family: 'Caveat', cursive;
+  font-size: var(--caveat-label);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--home-index-accent);
+  text-decoration: none;
+}
+
+.home-index__section:hover { color: var(--sunset); }
+
+.home-index__section::after { display: none; }
+
+.home-index__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-gray);
+  white-space: nowrap;
+}
+
+.home-index__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-index__item + .home-index__item {
+  border-top: 1px dotted var(--rule-gray);
+}
+
+.home-index__link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  overflow: hidden;
+  padding: 0.4rem 0.45rem;
+  text-decoration: none;
+  color: var(--black);
+  transition: background-color 0.15s ease;
+}
+
+.home-index__link:hover {
+  background: var(--bg-card);
+  text-decoration: none;
+}
+
+.home-index__link::after { display: none; }
+
+/* Titles never wrap: one line per sketch is the whole point of this list, and
+   `overflow-wrap: break-word` on body would otherwise split them mid-word. A
+   title long enough to fill the row clips rather than pushing the layout. */
+.home-index__title {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  line-height: 1.35;
+  transition: color 0.15s ease;
+}
+
+.home-index__link:hover .home-index__title { color: var(--home-index-accent); }
+
+/* The gloss takes whatever room the title leaves and clips rather than wraps,
+   so every row stays exactly one line tall. */
+.home-index__summary {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--mid-gray);
+  font-size: var(--text-xs);
+  line-height: 1.35;
+}
+
+.home-index__summary::before {
+  content: "\00b7";
+  margin-right: 0.55rem;
+  color: var(--rule-gray);
+}
+
+
+@media (max-width: 640px) {
+  /* Titles alone at this width — a clipped gloss would show a word or two. */
+  .home-index__summary { display: none; }
+}
+
+.tag-browse-cta {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.25rem 0 2.25rem;
+}
+
+.tag-browse-button,
+.tag-browse-button:visited {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid rgba(192, 81, 49, 0.55);
+  border-bottom-color: rgba(192, 81, 49, 0.55);
+  border-radius: 2px;
+  padding: 0.62rem 0.9rem 0.56rem;
+  background: var(--white);
+  color: var(--dark-gray);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tag-browse-button:hover,
+.tag-browse-button:visited:hover,
+.tag-browse-button:focus {
+  border-color: var(--terra);
+  border-bottom-color: var(--terra);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+}
+
+.tag-browse-button:hover,
+.tag-browse-button:visited:hover {
+  color: var(--terra);
+}
+
+.tag-browse-button:focus {
+  color: var(--dark-gray);
+}
+
+.sketch-bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 3rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule-gray);
+}
+
+.sketch-bottom-nav-button {
+  justify-content: center;
+  min-width: 0;
+  text-align: center;
+  white-space: normal;
+  line-height: 1.25;
+}
+
+.sketch-bottom-nav-button--disabled {
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--muted-gray);
+  opacity: 0.65;
+  box-shadow: none;
+}
+
+.sketch-bottom-nav-button--disabled:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--muted-gray);
+  box-shadow: none;
+}
+
+.sketch-bottom-nav-button--tags {
+  border-color: rgba(192, 81, 49, 0.72);
+}
+
+
+/* ─── Tags ────────────────────────────────────────────────────────────────── */
+.sketch-tag {
+  display: inline-block;
+  max-width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  padding: 2px 7px;
+  border-radius: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow-wrap: anywhere;
+}
+
+.sketch-tag.topic {
+  background: transparent;
+  color: var(--mid-gray);
+  border: 1px solid var(--rule-gray);
+}
+
+/* ─── Intro cards (listing pages) ────────────────────────────────────────── */
+.sketchbook-intro-cards {
+  margin: 2rem 0 2.5rem;
+}
+
+.sketchbook-intro-cards .card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 1.25rem;
+  padding: 2rem 1.5rem 2rem 1rem;
+  position: relative;
+  transition: background-color 0.15s ease, box-shadow 0.2s ease;
+}
+
+.sketchbook-intro-cards .card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  transform: none;
+  background: transparent;
+}
+
+.sketchbook-intro-cards .card[data-href] {
+  cursor: pointer;
+}
+
+/* Three-column row: meta | image | content */
+.sketchbook-intro-cards .card .row {
+  flex-wrap: nowrap;
+  align-items: stretch;
+}
+
+.card-meta-col {
+  flex: none;
+  width: 124px;
+  min-width: 124px;
+  padding: 0.85rem 0.55rem 0.85rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-right: 0.55rem;
+}
+
+.card-meta-item {
+  display: block;
+  min-width: 0;
+}
+
+.card-meta-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: var(--muted-gray);
+  margin-bottom: var(--spacing-xs);
+}
+
+.card-meta-value {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.4;
+  color: var(--dark-gray);
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+.card-meta-year {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Meta value colors, by field */
+.card-meta-status.rough    { color: var(--muted-gray); }
+.card-meta-status.tested   { color: var(--turquoise); }
+.card-meta-status.refined  { color: var(--terra); }
+.card-meta-status.lightly-tested { color: var(--mesa); }
+
+.card-meta-type.activity   { color: var(--terra); }
+.card-meta-type.assignment { color: var(--sunset); }
+.card-meta-type.policy     { color: var(--mesa); }
+.card-meta-type.policy-sketch { color: var(--indigo); }
+.card-meta-type.research   { color: var(--turquoise); }
+.card-meta-type.data-work,
+.card-meta-type.processing-sources { color: var(--turquoise); }
+
+/* Topic tags stacked in the narrow meta column; above the card's stretched link so they stay clickable */
+.card-meta-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  margin-top: 0.15rem;
+  position: relative;
+  z-index: 2;
+}
+
+.card-meta-tags .sketch-tag {
+  white-space: normal;
+  overflow-wrap: normal;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+.card-meta-effort,
+.card-meta-level,
+.card-meta-tools {
+  color: var(--muted-gray);
+}
+
+.card-meta-effort { color: var(--dark-gray); }
+
+.sketchbook-intro-cards .card-horizontal .col-sm-4 {
+  flex: 0 0 24%;
+  max-width: 24%;
+}
+
+.sketchbook-intro-cards .card-horizontal .col-sm-8,
+.sketchbook-intro-cards .card-horizontal .col-sm-12 {
+  flex: 1;
+  max-width: none;
+  min-width: 0;
+}
+
+/* Top rule divider */
+.sketchbook-intro-cards .card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule-gray);
+  transition: background 0.15s ease, height 0.15s ease;
+}
+
+.sketchbook-intro-cards .card:hover::before {
+  height: 2px;
+  background: var(--terra);
+}
+
+/* Bottom rule on last card */
+.sketchbook-intro-cards .card::after {
+  display: none;
+}
+
+.sketchbook-intro-cards .card:last-child::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--rule-gray);
+  display: block;
+}
+
+.sketchbook-intro-cards .card .card-main-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.sketchbook-intro-cards .card .card-main-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Card image */
+.sketchbook-intro-cards .card-image,
+.sketchbook-intro-cards .card-img-top {
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  margin: 0;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(0.5) saturate(0.75) contrast(1.1);
+  transition: filter 0.35s ease;
+}
+
+.sketchbook-intro-cards .card-image--left {
+  object-position: 10% 50%;
+}
+
+.card-img-top,
+.card-img-left {
+  overflow: hidden;
+}
+
+.card-image-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card-image-media--left {
+  object-position: 10% 50%;
+}
+
+.sketchbook-intro-cards .card:hover .card-image,
+.sketchbook-intro-cards .card:hover .card-img-top {
+  filter: grayscale(0) saturate(1) contrast(1);
+}
+
+.sketchbook-intro-cards .card .col-sm-4 {
+  padding-right: 1.4rem;
+}
+
+/* Title & text */
+.sketchbook-intro-cards .card-horizontal .card-title,
+.sketchbook-intro-cards .card-title {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(2.2rem, 3.08vw, 2.86rem);
+  font-weight: 400;
+  color: var(--black);
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 0.95;
+  transform: rotate(-0.5deg);
+  transform-origin: left center;
+  transition: text-shadow 0.2s ease;
+}
+
+.sketchbook-intro-cards .card-text {
+  color: var(--mid-gray);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.sketchbook-intro-cards .card-body {
+  padding: 0.2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 220px;
+}
+
+.sketchbook-intro-cards .card-text {
+  font-size: var(--text-base);
+  line-height: 1.55;
+}
+
+/* Skills list */
+.sketch-skills {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.5rem;
+}
+
+.sketch-skills li {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  letter-spacing: 0;
+  color: var(--dark-gray);
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+.sketch-skills li::before {
+  content: "✓ ";
+  color: var(--terra);
+  font-size: var(--text-label);
+}
+
+.sketch-skills--research li::before {
+  color: var(--turquoise);
+}
+
+/* Section label & section text */
+.sketch-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-gray);
+  display: block;
+  margin-bottom: 0.2rem;
+  margin-top: 1.1rem;
+}
+
+.sketch-section {
+  margin-bottom: 0;
+  font-size: var(--text-md);
+  color: var(--mid-gray);
+  line-height: 1.45;
+}
+
+/* The key question is what readers skim for, so it reads darker and heavier */
+.sketch-section--key {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--near-black);
+  line-height: 1.4;
+}
+
+/* Tag overrides within intro cards */
+.sketchbook-intro-cards .sketch-tag {
+  background: transparent;
+}
+
+.sketchbook-intro-cards a.sketch-tag {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sketchbook-intro-cards .card:hover .card-title {
+  color: var(--black);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+.sketchbook-intro-cards .card:hover .card-text  { color: var(--dark-gray); }
+
+.sketchbook-post-meta a.sketch-tag,
+.sketchbook-intro-cards a.sketch-tag {
+  text-decoration: none;
+}
+
+.sketchbook-post-meta a.sketch-tag:hover,
+.sketchbook-intro-cards a.sketch-tag:hover {
+  color: var(--terra);
+  border-color: rgba(192, 81, 49, 0.4);
+  background: var(--teach-soft);
+}
+
+
+/* ─── Tags page ──────────────────────────────────────────────────────────── */
+.sketchbook-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.sketchbook-tag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem 0.25rem;
+  border-radius: 0;
+  border: 1px solid var(--rule-gray);
+  background: transparent;
+  color: var(--mid-gray);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.sketchbook-tag-badge:hover {
+  transform: none;
+  border-color: var(--terra);
+  color: var(--terra);
+  background: transparent;
+}
+
+.sketchbook-tag-badge.active {
+  background: var(--teach-soft);
+  border-color: var(--terra);
+  color: var(--terra);
+}
+
+.sketchbook-tag-badge .tag-count {
+  font-size: var(--text-label);
+  color: var(--muted-gray);
+}
+
+.sketchbook-tag-summary,
+.sketchbook-tag-empty {
+  color: var(--mid-gray);
+  margin-bottom: 1rem;
+}
+
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sketch-bottom-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .sketchbook-intro-cards .card {
+    padding: 1.5rem 1rem;
+  }
+
+  .sketchbook-intro-cards .card .col-sm-4 {
+    padding-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .sketchbook-intro-cards .card-image,
+  .sketchbook-intro-cards .card-img-top,
+  .sketchbook-intro-cards .card-body {
+    min-height: 0;
+  }
+
+  .sketchbook-intro-cards .card-image,
+  .sketchbook-intro-cards .card-img-top {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .sketchbook-intro-cards .card .row { flex-wrap: wrap; }
+
+  .card-meta-col {
+    width: 100%;
+    min-width: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 0.85rem;
+    border-right: none;
+    border-bottom: 1px solid var(--rule-gray);
+    padding: 0.5rem 0 0.6rem;
+    margin-right: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-meta-item {
+    flex: 0 1 auto;
+  }
+
+  .sketchbook-intro-cards .card-horizontal .col-sm-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .sketchbook-intro-cards .card-horizontal .col-sm-8,
+  .sketchbook-intro-cards .card-horizontal .col-sm-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .sketch-tag {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 420px) {
+  .sketchbook-intro-cards .card {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .sketchbook-intro-cards .card-horizontal .card-title,
+  .sketchbook-intro-cards .card-title {
+    font-size: clamp(1.85rem, 14vw, 2.3rem);
+  }
+
+  .card-meta-col {
+    gap: 0.5rem;
+  }
+}
+
+
+/* ─── Related sketch cards (nav/related-sketches.html) ────────────────────── */
+.related-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 1rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--rule-gray);
+  border-top: 3px solid var(--terra);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.related-card--policy { border-top-color: var(--indigo); }
+
+.related-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.related-card-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-gray);
+}
+
+.related-card-title {
+  font-family: 'Caveat', cursive;
+  font-size: var(--caveat-label);
+  line-height: 1;
+  color: var(--black);
+}
+
+.related-card:hover .related-card-title { color: var(--terra); }
+.related-card--policy:hover .related-card-title { color: var(--indigo); }
+
+.related-card-point {
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--mid-gray);
+}
+

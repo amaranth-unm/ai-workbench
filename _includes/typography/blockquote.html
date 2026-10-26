@@ -1,0 +1,15 @@
+{% comment %}
+  Blockquote — for quoted material from an external source.
+  For editorial callouts pulled from the page's own text, use pullquote.html instead.
+
+  Usage:
+    {% include typography/blockquote.html text="Quoted text here." attribution="Author Name" %}
+
+  Parameters:
+    text:        quote content, markdown supported (required)
+    attribution: optional source or author
+{% endcomment %}
+<blockquote class="sketchbook-blockquote">
+  {{ include.text | markdownify }}
+  {% if include.attribution %}<cite>{{ include.attribution }}</cite>{% endif %}
+</blockquote>

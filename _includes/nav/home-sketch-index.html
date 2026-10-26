@@ -1,0 +1,65 @@
+{% comment %}
+  Home Sketch Index
+
+  A compact, table-of-contents style list of every sketch — one row per page,
+  title plus a one-line gloss, grouped by section. It sits near the bottom of
+  the home page so a reader who has scrolled that far can see the whole
+  collection at once and jump straight into a sketch.
+
+  Deliberately lighter than nav/card-list.html (the boxes on the section index
+  pages): no thumbnails, no meta column, one line per sketch.
+
+  The heading belongs to the calling page (an `##` in index.md), not to this
+  include — the include renders only the grouped rows.
+
+  Usage:
+    {% include nav/home-sketch-index.html %}
+    {% include nav/home-sketch-index.html sections="/teaching/,/research/,/policy/" %}
+
+  Parameters:
+    - sections: comma-separated folder list, in the order they should appear.
+        Defaults to "/research/" — the same pair nav/home-tag-cloud
+        draws from. A folder listed here needs a matching
+        accent class in the "Home sketch index" block of cards.css.
+
+  Front matter each row reads:
+    title       — the row label (required)
+    summary     — the one-line gloss (optional; the row still renders without)
+    card_order  — sort position, as on the section index pages
+    listed      — `false` keeps a page out of the list
+{% endcomment %}
+
+{% assign index_sections = include.sections | default: "/research/" | split: "," %}
+
+<div class="home-index">
+  {% for section_dir in index_sections %}
+    {% assign section_pages = site.pages
+      | where: "dir", section_dir
+      | where_exp: "item", "item.name != 'index.md'"
+      | where_exp: "item", "item.listed != false"
+      | sort: "card_order" %}
+
+    {% if section_pages.size > 0 %}
+    {% assign section_slug = section_dir | replace: "/", "" %}
+    <div class="home-index__group {{ section_slug }}">
+      <div class="home-index__head">
+        <a class="home-index__section" href="{{ section_dir | relative_url }}">{{ section_slug | capitalize }}</a>
+        <span class="home-index__count">{{ section_pages.size }} {% if section_pages.size == 1 %}sketch{% else %}sketches{% endif %}</span>
+      </div>
+
+      <ul class="home-index__list">
+        {% for item in section_pages %}
+        <li class="home-index__item">
+          <a class="home-index__link" href="{{ item.url | relative_url }}">
+            <span class="home-index__title">{{ item.title }}</span>
+            {% if item.summary %}
+            <span class="home-index__summary">{{ item.summary | strip_html }}</span>
+            {% endif %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,22 @@
+{% comment %}
+  Callout — highlights a key point, warning, or tip inline in the text.
+
+  Usage:
+    {% include typography/callout.html type="note" text="Your text here." %}
+    {% include typography/callout.html type="warning" title="Watch out" text="Your text here." %}
+
+  Types:
+    note    — gold/sunset, for key insights (default)
+    warning — terra/red, for caveats and risks
+    tip     — turquoise, for practical advice
+    prompt  — gray/mono, for student-facing AI prompts
+
+  Parameters:
+    type:  note | warning | tip (default: note)
+    text:  content, markdown supported (required)
+    title: optional heading
+{% endcomment %}
+<div class="callout callout-{{ include.type | default: 'note' }}">
+  {% if include.title %}<p class="callout-title">{{ include.title }}</p>{% endif %}
+  {{ include.text | markdownify }}
+</div>

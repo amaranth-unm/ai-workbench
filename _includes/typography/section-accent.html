@@ -1,0 +1,17 @@
+{% comment %}
+  Section accent — colored divider line placed after the H1.
+  Type is auto-detected from the page's folder; no parameters needed.
+
+  Usage:
+    {% include typography/section-accent.html %}
+{% endcomment %}
+{% if page.url contains '/teaching/' %}
+  {% assign accent_type = 'teach' %}
+{% elsif page.url contains '/policy/' %}
+  {% assign accent_type = 'policy' %}
+{% elsif page.url contains '/research/' %}
+  {% assign accent_type = 'research' %}
+{% else %}
+  {% assign accent_type = 'default' %}
+{% endif %}
+<span class="section-accent {{ accent_type }}"></span>

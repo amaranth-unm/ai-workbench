@@ -1,0 +1,490 @@
+/* ─── Sketch info box ────────────────────────────────────────────────────── */
+/* Two columns divided by a thin rule: what the sketch is | practical details.
+   Labels sit above their values so both columns stay compact. */
+.sketch-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  padding: 1.1rem 1.25rem;
+  margin: 0 0 2.25rem 0;
+  background: var(--off-white);
+  border-left: 3px solid var(--rule-gray);
+  --sketch-info-rule: var(--rule-gray);
+}
+
+/* On sketch pages the box breaks out of the 48rem reading column: with two
+   columns it has room to use. It spans the container's full grid and centers
+   itself, so on narrow screens it simply matches the content width. */
+.container > .sketch-info {
+  grid-column: full-start / full-end;
+  justify-self: center;
+  width: min(64rem, 100% - 3rem);
+}
+
+.sketch-info--teach    { border-left-color: var(--terra);     background: var(--teach-soft);    --sketch-info-rule: var(--teach-mid); }
+.sketch-info--policy   { border-left-color: var(--indigo);    background: var(--policy-soft);   --sketch-info-rule: var(--policy-mid); }
+.sketch-info--research { border-left-color: var(--turquoise); background: var(--research-soft); --sketch-info-rule: var(--research-mid); }
+
+.sketch-info-col {
+  margin: 0;
+  min-width: 0;
+}
+
+.sketch-info-col--what {
+  padding-right: 1.4rem;
+}
+
+.sketch-info-col--details {
+  padding-left: 1.4rem;
+  border-left: 1px solid var(--sketch-info-rule);
+}
+
+.sketch-info-col--details:empty,
+.sketch-info-col--what:empty {
+  display: none;
+}
+
+.sketch-info dt {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dark-gray);
+  margin: 0 0 0.15rem;
+  line-height: 1.5;
+}
+
+.sketch-info dd + dt {
+  margin-top: 1rem;
+}
+
+/* Labels take a deeper shade of the section accent so they read clearly on the tint */
+.sketch-info--teach dt    { color: var(--terra-dark); }
+.sketch-info--policy dt   { color: var(--indigo); }
+.sketch-info--research dt { color: var(--turquoise); }
+
+@media (max-width: 640px) {
+  .sketch-info {
+    grid-template-columns: 1fr;
+  }
+
+  .sketch-info-col--what {
+    padding-right: 0;
+  }
+
+  .sketch-info-col--details {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--sketch-info-rule);
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+}
+
+.sketch-info dd {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: var(--text-md);
+  color: var(--dark-gray);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.sketch-info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sketch-info-list li {
+  position: relative;
+  margin: 0 0 0.32rem;
+  padding-left: 0.9rem;
+  line-height: 1.38;
+}
+
+.sketch-info-list li:last-child {
+  margin-bottom: 0;
+}
+
+.sketch-info-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+
+/* ─── Pullquote ───────────────────────────────────────────────────────────── */
+.pullquote {
+  position: relative;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);   /* ~1.85× body; IM Fell's small x-height reads small */
+  font-style: italic;
+  line-height: 1.42;
+  color: var(--dark-gray);
+  margin: 2.5rem 0;
+  padding: 1.5rem 1.5rem 1rem;
+}
+
+.pullquote::before {
+  content: '\201C';
+  position: absolute;
+  top: -0.05em;
+  left: -0.05em;
+  z-index: 0;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 14rem;
+  line-height: 0.8;
+  color: var(--terra);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.pullquote p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: inherit;
+}
+
+
+/* ─── Callouts ────────────────────────────────────────────────────────────── */
+.callout {
+  border-left: 3px solid var(--sunset);
+  background: rgba(237, 139, 0, 0.05);
+  padding: 1rem 1.25rem;
+  /* The content column is a grid, so margins don't collapse: a small top margin
+     plus the preceding paragraph's bottom margin matches the 1.75rem below. */
+  margin: 0.5rem 0 1.75rem;
+  border-radius: 0 2px 2px 0;
+}
+
+.callout-warning {
+  border-left-color: var(--terra);
+  background: rgba(192, 81, 49, 0.05);
+}
+
+.callout-tip {
+  border-left-color: var(--turquoise);
+  background: rgba(0, 122, 134, 0.05);
+}
+
+.callout-prompt {
+  border-left: 3px solid var(--mesa);
+  background: var(--light-gray);
+  transform: rotate(-0.2deg);
+  transform-origin: left center;
+}
+
+/* The one prompt style (typography/sketch-prompt.html renders this too).
+   Upright mono reads as "text to copy" without the strain of italic mono. */
+.callout-prompt .callout-title {
+  color: var(--terra-dark);
+}
+
+.callout-prompt p:not(.callout-title) {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--dark-gray);
+}
+
+.callout-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-gray);
+  margin: 0 0 0.5rem 0;
+}
+
+.callout p {
+  margin: 0;
+  color: var(--dark-gray);
+  font-size: var(--text-md);
+}
+
+.callout p + p {
+  margin-top: 0.5rem;
+}
+
+
+/* ─── Blockquote ──────────────────────────────────────────────────────────── */
+.sketchbook-blockquote {
+  border-left: 3px solid var(--rule-gray);
+  margin: 1.75rem 0;
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  color: var(--mid-gray);
+  font-style: italic;
+}
+
+.sketchbook-blockquote p {
+  margin: 0;
+  color: inherit;
+}
+
+.sketchbook-blockquote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-gray);
+}
+
+
+/* ─── Code blocks ────────────────────────────────────────────────────────── */
+code {
+  color: var(--terra);
+  background-color: rgba(214, 164, 97, 0.12);
+  border-color: rgba(214, 164, 97, 0.35);
+  border-radius: 2px;
+}
+
+.highlight {
+  background: var(--off-white);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+div.highlight {
+  border-left: 3px solid var(--mesa);
+}
+
+pre.highlight {
+  border: none;
+}
+
+.highlight pre {
+  color: var(--dark-gray);
+}
+
+.highlight code {
+  border: none;
+  background: transparent;
+}
+
+
+/* ─── Figures ────────────────────────────────────────────────────────────── */
+.figure-placeholder {
+  border: 2px dashed var(--rule-gray);
+  padding: 1.5rem;
+  color: var(--muted-gray);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.figure-sized {
+  width: min(var(--figure-width, 40%), 100%);
+}
+
+.figure-sized img {
+  width: 100%;
+  height: auto;
+}
+
+figure figcaption,
+figure figcaption p {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: var(--text-xs);
+  color: var(--muted-gray);
+  line-height: 1.45;
+  margin-top: 0.45rem;
+}
+
+figure.right {
+  float: right;
+  margin: 0 0 1rem 1.75rem;
+  clear: right;
+}
+
+figure.left {
+  float: left;
+  margin: 0 1.75rem 1rem 0;
+  clear: left;
+}
+
+figure.right img,
+figure.left img {
+  border-radius: 10px;
+  box-shadow: 3px 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.figure-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-lg);
+  margin: 1.5rem 0;
+}
+
+.figure-wrap--right {
+  flex-direction: row-reverse;
+}
+
+.figure-wrap__image {
+  flex: 0 1 var(--figure-wrap-image-width, 40%);
+  max-width: 100%;
+  margin: 0;
+}
+
+.figure-wrap__image img {
+  width: 100%;
+  height: auto;
+}
+
+.figure-wrap__text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  figure.right,
+  figure.left {
+    float: none;
+    width: 100%;
+    margin: 0 0 1.25rem;
+  }
+
+  .figure-sized {
+    width: 100%;
+  }
+
+  .figure-wrap,
+  .figure-wrap--right {
+    flex-direction: column;
+  }
+
+  .figure-wrap__image {
+    flex-basis: auto;
+    width: 100%;
+  }
+}
+
+
+/* ─── Sketch info: status meter ───────────────────────────────────────────── */
+.sketch-status {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.sketch-status-meter {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.sketch-status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--terra-dark);
+  background: transparent;
+}
+
+.sketch-status-dot.is-filled { background: var(--terra-dark); }
+
+.sketch-info--policy .sketch-status-dot            { border-color: var(--indigo); }
+.sketch-info--policy .sketch-status-dot.is-filled  { background: var(--indigo); }
+.sketch-info--research .sketch-status-dot           { border-color: var(--turquoise); }
+.sketch-info--research .sketch-status-dot.is-filled { background: var(--turquoise); }
+
+/* Same type as .sketch-tag (cards.css), minus the box */
+.sketch-status-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+}
+
+
+/* ─── Sketch info: topic tags row ─────────────────────────────────────────── */
+.sketch-info .sketchbook-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+
+/* ─── Using This Sketch (license + citation) ──────────────────────────────── */
+.sketch-license {
+  margin: var(--spacing-xl) 0 var(--spacing-lg);
+  padding: var(--spacing-sm) 1.25rem;
+  background: var(--off-white);
+  border-top: 1px solid var(--rule-gray);
+  font-size: var(--text-sm);
+  color: var(--mid-gray);
+}
+
+.sketch-license-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.sketch-aside-heading {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--dark-gray);
+  margin: 0 0 0.6rem;
+}
+
+.sketch-print-button {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 10px;
+  background: transparent;
+  color: var(--mid-gray);
+  border: 1px solid var(--rule-gray);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.sketch-print-button:hover {
+  color: var(--terra);
+  border-color: var(--terra);
+}
+
+.sketch-license p {
+  margin: 0 0 0.6rem;
+}
+
+.sketch-license-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted-gray);
+  margin-bottom: 0.2rem !important;
+}
+
+.sketch-license-image .sketch-license-label {
+  display: inline;
+  margin-right: 0.35rem;
+}
+
+.sketch-citation {
+  color: var(--dark-gray);
+  overflow-wrap: anywhere;
+}
+
+
+/* ─── Related sketches ────────────────────────────────────────────────────── */
+.sketch-related {
+  margin: 0 0 var(--spacing-lg);
+}

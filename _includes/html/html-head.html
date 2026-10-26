@@ -1,0 +1,45 @@
+<!-- Derived from the Xanthan template: https://github.com/xanthan-web/xanthan-web.github.io -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% if page.title %}{{ page.title | escape }} // {{ site.title | escape }}{% else %}{{ site.title | escape }} // {{ site.tagline | escape }}{% endif %}</title>
+
+  <meta name="description" content="{{ page.summary | default: site.description | escape }}">
+  <meta name="author" content="{{ site.author | default: '' }}">
+  {% if site.url %}<link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">{% endif %}
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+  <meta property="og:description" content="{{ page.summary | default: site.description | escape }}">
+  {% if site.url %}<meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">{% endif %}
+  {% if site.url and page.thumbnail or site.url and page.header-image %}
+  <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}{{ page.dir }}{{ page.thumbnail | default: page.header-image }}">
+  {% endif %}
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Footnotes -->
+  <link rel="stylesheet" href="https://unpkg.com/littlefoot/dist/littlefoot.css" />
+
+  <!-- Sketchbook theme -->
+  <link href="{{site.baseurl}}/assets/css/vars.css" rel="stylesheet">
+  <link href="{{site.baseurl}}/assets/css/base.css" rel="stylesheet">
+  <link href="{{site.baseurl}}/assets/css/typography.css" rel="stylesheet">
+  <link href="{{site.baseurl}}/assets/css/nav.css" rel="stylesheet">
+  <link href="{{site.baseurl}}/assets/css/components.css" rel="stylesheet">
+  <link href="{{site.baseurl}}/assets/css/cards.css" rel="stylesheet">
+  <link href="{{site.baseurl}}/assets/css/layout.css" rel="stylesheet">
+
+  <!-- Page header: loaded when a page sets header-image in front matter -->
+  {% if page.header-image %}
+  <link href="{{site.baseurl}}/assets/css/page-header.css" rel="stylesheet">
+  {% endif %}
+
+  <!-- Search: loaded when search is enabled in _config.yml -->
+  {% if site.search %}
+  <link href="{{site.baseurl}}/assets/css/search.css" rel="stylesheet">
+  {% endif %}
+
+</head>

@@ -1,0 +1,119 @@
+/* ─── Search overlay ─────────────────────────────────────────────────────── */
+
+.search-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.92);
+  z-index: 2000;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+}
+
+.search-overlay.active {
+  display: flex;
+}
+
+.search-overlay-inner {
+  width: 100%;
+  max-width: 640px;
+  padding: 0 1.5rem;
+}
+
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--sunset);
+  color: var(--white);
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-style: italic;
+  padding: 0.5rem 0;
+  outline: none;
+  caret-color: var(--sunset);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.search-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: var(--text-2xl);
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.search-close:hover {
+  color: var(--white);
+}
+
+.search-hint {
+  font-family: 'Fira Mono', monospace;
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.25);
+  margin-top: 1rem;
+}
+
+.search-hint kbd {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  padding: 0.1em 0.35em;
+  font-family: inherit;
+}
+
+/* ─── Results ─────────────────────────────────────────────────────────────── */
+
+.search-results {
+  margin-top: 1.5rem;
+}
+
+.search-results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-result-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.85rem 0;
+}
+
+.search-result-link {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.search-result-link:hover {
+  color: var(--sunset);
+}
+
+.search-result-summary {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0.2rem 0 0;
+  line-height: 1.5;
+}
+
+.search-no-results {
+  color: rgba(255, 255, 255, 0.45);
+  font-style: italic;
+  margin-top: 1rem;
+}

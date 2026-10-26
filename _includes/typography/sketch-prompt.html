@@ -1,0 +1,15 @@
+{% comment %}
+  Sketch prompt — shorthand for a one-line AI prompt. It renders exactly the
+  same box as typography/callout.html type="prompt" (one prompt style site-wide);
+  use the callout directly for multi-paragraph prompts built in a capture block.
+
+  Usage:
+    {% include typography/sketch-prompt.html text="What does cilantro taste like?" %}
+    {% include typography/sketch-prompt.html label="prompt to give to Copilot" text="..." %}
+
+  Parameters:
+    text:  the prompt text (required)
+    label: small caps label above the prompt (default: "prompt")
+{% endcomment %}
+{% assign sketch_prompt_label = include.label | default: "prompt" %}
+{% include typography/callout.html type="prompt" title=sketch_prompt_label text=include.text %}

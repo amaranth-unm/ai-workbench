@@ -1,0 +1,18 @@
+{% assign text_width = include.text-width | default: "50" %}
+{% assign button_label = include.button | default: include.title %}
+{% assign width_class = "feature-row-text" %}
+{% if text_width == "60" %}
+  {% assign width_class = width_class | append: " feature-row-text--wide" %}
+{% elsif text_width == "40" %}
+  {% assign width_class = width_class | append: " feature-row-text--narrow" %}
+{% endif %}
+
+<div class="feature-row">
+  <div class="{{ width_class }}">
+    <h5>{{ include.title }}</h5>
+    <p>{{ include.text }}</p>
+  </div>
+  <div class="feature-row-action">
+    <a href="{{ include.link }}" class="btn-secondary">{{ button_label }} →</a>
+  </div>
+</div>

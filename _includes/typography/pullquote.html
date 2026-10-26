@@ -1,0 +1,12 @@
+{% comment %}
+  Pullquote — floats a key passage as a visual aside.
+
+  Usage:
+    {% include typography/pullquote.html text="The striking thing you said." %}
+
+  Parameters:
+    text: quote content, markdown supported (required)
+{% endcomment %}
+<aside class="pullquote">
+  {{ include.text | markdownify }}
+</aside>

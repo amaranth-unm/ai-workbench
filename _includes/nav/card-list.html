@@ -1,0 +1,118 @@
+{% assign items = include.cards %}
+{% if include.pages %}
+  {% assign items = include.pages %}
+{% endif %}
+
+{% for item in items %}
+{% assign card_href = item.link | default: item.url | relative_url %}
+{% assign card_thumbnail = item.thumbnail | default: item.image | default: item.header-image %}
+{% assign card_summary = item.summary | default: item.description %}
+{% assign card_classes = "card card-horizontal mb-3" %}
+{% if include.tag-data %}
+  {% assign card_classes = card_classes | append: " sketch-tag-card" %}
+{% endif %}
+{% assign joined_tags = item.tags | join: '|' | downcase %}
+{% if item.url contains '/research/' %}{% assign card_section = "research" %}
+{% elsif item.url contains '/policy/' %}{% assign card_section = "policy" %}
+{% else %}{% assign card_section = nil %}{% endif %}
+<div class="{{ card_classes }}" data-href="{{ card_href }}"{% if include.tag-data and item.tags %} data-tags="{{ joined_tags }}"{% endif %}>
+  <div class="row g-0 align-items-stretch">
+    <div class="card-meta-col">
+      {% if item.date %}
+      <span class="card-meta-item">
+        <span class="card-meta-label">Date</span>
+        <span class="card-meta-value card-meta-year">{{ item.date | date: "%b %Y" }}</span>
+      </span>
+      {% endif %}
+      {% if item.status %}
+      <span class="card-meta-item">
+        <span class="card-meta-label">Status</span>
+        <span class="card-meta-value card-meta-status {{ item.status | replace: ' ', '-' }}">{{ item.status }}</span>
+      </span>
+      {% endif %}
+      {% if item.type %}
+      <span class="card-meta-item">
+        <span class="card-meta-label">Type</span>
+        <span class="card-meta-value card-meta-type {{ item.type | replace: ' ', '-' | replace: '/', '-' }}">{{ item.type }}</span>
+      </span>
+      {% elsif card_section %}
+      <span class="card-meta-item">
+        <span class="card-meta-label">Type</span>
+        <span class="card-meta-value card-meta-type {{ card_section }}">{{ card_section }}</span>
+      </span>
+      {% endif %}
+      {% if item.effort %}
+      <span class="card-meta-item">
+        <span class="card-meta-label">Time</span>
+        <span class="card-meta-value card-meta-effort">{{ item.effort }}</span>
+      </span>
+      {% endif %}
+      {% if item.level %}
+      <span class="card-meta-item">
+        <span class="card-meta-label">Level</span>
+        <span class="card-meta-value card-meta-level">{{ item.level }}</span>
+      </span>
+      {% endif %}
+      {% if item.tags %}
+      <span class="card-meta-item">
+        <span class="card-meta-label">Topics</span>
+        <span class="card-meta-tags">{% for tag in item.tags limit: 3 %}<a class="sketch-tag topic" href="{{ '/tags/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a>{% endfor %}</span>
+      </span>
+      {% endif %}
+    </div>
+    {% if card_thumbnail %}
+    {% capture card_img_url %}{% include images/image-path.html image-path=card_thumbnail page-dir=item.dir %}{% endcapture %}
+    <div class="col-sm-4">
+      {% assign card_image_class = "img-fluid card-image" %}
+      {% if item.thumbnail-position == "10% 50%" %}
+        {% assign card_image_class = card_image_class | append: " card-image--left" %}
+      {% endif %}
+      <img src="{{ card_img_url | strip }}" class="{{ card_image_class }}" alt="{{ item.title | escape }}">
+    </div>
+    <div class="col-sm-8 d-flex align-items-center">
+    {% else %}
+    <div class="col-sm-12 d-flex align-items-center">
+    {% endif %}
+      <div class="card-body">
+          <h3 class="card-title"><a class="card-main-link stretched-link" href="{{ card_href }}">{{ item.title }}</a></h3>
+          {% if card_section == "research" %}
+            {% if item.summary %}
+            <p class="sketch-section"><span class="sketch-label">Experiment</span>{{ item.summary }}</p>
+            {% endif %}
+            {% if item.results %}
+            <span class="sketch-label">Results</span>
+            <ul class="sketch-skills sketch-skills--research">
+              {% for r in item.results %}<li>{{ r }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+          {% elsif card_section == "policy" %}
+            {% assign key_q = item['key-question'] | default: card_summary %}
+            {% if key_q %}
+            <p class="sketch-section sketch-section--key"><span class="sketch-label">Key question</span>{{ key_q }}</p>
+            {% endif %}
+            {% if item['what-students-learn'] %}
+            <span class="sketch-label">What it clarifies</span>
+            <ul class="sketch-skills">
+              {% for learn in item['what-students-learn'] %}<li>{{ learn }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+          {% else %}
+            {% assign key_q = item['key-question'] | default: card_summary %}
+            {% if key_q %}
+            <p class="sketch-section sketch-section--key"><span class="sketch-label">Key question</span>{{ key_q }}</p>
+            {% endif %}
+            {% if item.summary %}
+            <p class="sketch-section"><span class="sketch-label">Activity</span>{{ item.summary }}</p>
+            {% endif %}
+            {% if item['what-students-learn'] %}
+            <span class="sketch-label">Learning aims</span>
+            <ul class="sketch-skills">
+              {% for learn in item['what-students-learn'] %}<li>{{ learn }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
