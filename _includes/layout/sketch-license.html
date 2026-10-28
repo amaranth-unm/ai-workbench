@@ -24,7 +24,7 @@
     <button type="button" class="sketch-print-button" data-print>Print</button>
   </div>
   <p>This experiment is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0</a>. You're welcome to share and adapt it for noncommercial purposes, with credit, as long as you share your adaptation under the same license.</p>
-  {% if page['thumbnail-credit'] %}<p class="sketch-license-image"><span class="sketch-license-label">Image</span> {{ page['thumbnail-credit'] | markdownify | remove: '<p>' | remove: '</p>' | strip }} The image's own license applies to it, separately from the sketch.</p>{% endif %}
+  {% if page['thumbnail-credit'] %}<p class="sketch-license-image"><span class="sketch-license-label">Image</span> {{ page['thumbnail-credit'] | markdownify | remove: '<p>' | remove: '</p>' | strip }} The image's own license applies to it, separately from the jig.</p>{% endif %}
   <p class="sketch-license-label">Suggested citation</p>
   <p class="sketch-citation">{% if page.author %}{{ page.author | split: "," | first | strip }}. {% endif %}"{{ page.title }}." <em>{{ site.title }}</em>, Amaranth, University of New Mexico{% if page.date %}, {{ page.date | date: "%B %-d, %Y" }}{% endif %}. {{ site.url }}{{ site.baseurl }}{{ page.url }}. Licensed under CC BY-NC-SA 4.0.</p>
 </section>

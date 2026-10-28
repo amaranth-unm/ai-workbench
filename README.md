@@ -22,4 +22,4 @@ This is a standalone Jekyll site. It has its own configuration, assets, includes
 
 This folder lives beside `ai-sketchbook` as `ai-workbench`. Create the `amaranth-unm/ai-workbench` repository, push these files, and configure GitHub Pages in the same way as AI Sketchbook. Confirm the production URL works before publishing the teaching site's research redirects.
 
-For classroom activities, assignments, and course policies, visit [AI Sketchbook](https://amaranth.unm.edu/ai-sketchbook/).
+For classroom activities and assignments, visit [AI Sketchbook](https://amaranth.unm.edu/ai-sketchbook/).

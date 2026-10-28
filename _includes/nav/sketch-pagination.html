@@ -39,11 +39,11 @@
     {% endif %}
   {% endfor %}
 
-  <nav class="sketch-bottom-nav" aria-label="Sketch navigation">
+  <nav class="sketch-bottom-nav" aria-label="Jig navigation">
     {% if previous_page %}
       <a class="tag-browse-button sketch-bottom-nav-button" href="{{ previous_page.url | relative_url }}">← {{ previous_page.title }}</a>
     {% else %}
-      <span class="tag-browse-button sketch-bottom-nav-button sketch-bottom-nav-button--disabled" aria-hidden="true">← Previous sketch</span>
+      <span class="tag-browse-button sketch-bottom-nav-button sketch-bottom-nav-button--disabled" aria-hidden="true">← Previous jig</span>
     {% endif %}
 
     <a class="tag-browse-button sketch-bottom-nav-button sketch-bottom-nav-button--tags" href="{{ '/tags/' | relative_url }}">Browse all tags</a>
@@ -51,7 +51,7 @@
     {% if next_page %}
       <a class="tag-browse-button sketch-bottom-nav-button" href="{{ next_page.url | relative_url }}">{{ next_page.title }} →</a>
     {% else %}
-      <span class="tag-browse-button sketch-bottom-nav-button sketch-bottom-nav-button--disabled" aria-hidden="true">Next sketch →</span>
+      <span class="tag-browse-button sketch-bottom-nav-button sketch-bottom-nav-button--disabled" aria-hidden="true">Next jig →</span>
     {% endif %}
   </nav>
 {% endif %}

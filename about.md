@@ -19,7 +19,7 @@ We welcome partial results, unsuccessful attempts, and decisions not to use AI. 
 
 ## Two companion sites
 
-AI Workbench covers research. [AI Sketchbook](https://amaranth.unm.edu/ai-sketchbook/) covers teaching: classroom activities, assignments, and course policies. Both are projects of [Amaranth Digital Humanities Studio](https://amaranth.unm.edu/) at the University of New Mexico and use the same Markdown-based site structure.
+AI Workbench covers research. [AI Sketchbook](https://amaranth.unm.edu/ai-sketchbook/) covers teaching: classroom activities and assignments. Both are projects of [Amaranth Digital Humanities Studio](https://amaranth.unm.edu/) at the University of New Mexico and use the same Markdown-based site structure.
 
 ## Contribute
 

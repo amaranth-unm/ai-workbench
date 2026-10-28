@@ -47,4 +47,4 @@ These describe experience and revision, not proof of accuracy or suitability for
 
 Your experiment is published under your name and licensed [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Others may share and adapt it for noncommercial purposes with credit and the same license. Images and source documents retain their own licenses.
 
-For classroom activities and course policies, contribute to [AI Sketchbook](https://amaranth.unm.edu/ai-sketchbook/contribute.html).
+For classroom activities and assignments, contribute to [AI Sketchbook](https://amaranth.unm.edu/ai-sketchbook/contribute.html).

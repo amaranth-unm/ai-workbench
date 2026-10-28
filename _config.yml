@@ -4,3 +4,6 @@ baseurl: /ai-workbench
 url: https://amaranth.unm.edu
 search: true
 repository: amaranth-unm/ai-workbench
+exclude:
+  - AGENTS.md
+  - STYLE-GUIDE.md

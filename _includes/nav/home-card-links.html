@@ -3,8 +3,7 @@
 
   The section cards under the home page intro. Renders one card per section,
   side by side at full content width, as the reader's main way into the
-  sketchbook. Each card is a single link; the sketch count comes from the
-  pages in that folder, so it stays right on its own.
+  sketchbook. Each card is a single link.
 
   Usage:
     {% include nav/home-card-links.html cards=page.home-cards %}
@@ -12,7 +11,7 @@
   Parameters:
     - cards: array of section entries, each with:
         title  — section name, shown in the handwritten face
-        href   — section index URL, e.g. "/teaching/" (also used to count sketches)
+        href   — section index URL, e.g. "/research/"
         class  — section accent class: teach | policy | research
         text   — a sentence or two on what the section holds
         go     — optional call-to-action line; defaults to "Browse <title> sketches →"
@@ -24,18 +23,10 @@
 <aside class="home-sections" aria-label="Browse by section">
   {% for card in cards %}
   {% assign card_href = card.href | default: card.url | default: "#" %}
-  {% assign section_count = site.pages
-    | where_exp: "item", "item.dir == card_href"
-    | where_exp: "item", "item.name != 'index.md'"
-    | where_exp: "item", "item.listed != false"
-    | size %}
   {% capture card_go %}Browse {{ card.title | downcase }} sketches →{% endcapture %}
   <a href="{{ card_href | relative_url }}" class="home-section-box {{ card.class }}">
     <span class="home-section-box__head">
       <span class="home-section-box__title">{{ card.title }}</span>
-      {% if section_count > 0 %}
-      <span class="home-section-box__count">{{ section_count }} {% if section_count == 1 %}sketch{% else %}sketches{% endif %}</span>
-      {% endif %}
     </span>
     <span class="home-section-box__text">{{ card.text }}</span>
     <span class="home-section-box__go">{{ card.go | default: card_go }}</span>

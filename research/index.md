@@ -1,6 +1,6 @@
 ---
 layout: sketchbook
-title: Research Sketches
+title: Jigs
 description: "Experiments with AI for transcription, bibliographic work, mapping, models, and writing."
 date: 2026-04-01
 wide: true
@@ -14,9 +14,9 @@ wide: true
 
 <div class="section-intro" markdown="1">
 
-# Research Sketches
+# Jigs
 
-Accounts of using AI for particular research tasks. Each sketch describes the source material, what the tool produced, and what the researcher did with it.
+Accounts of using AI for particular research tasks. Each jig describes the source material, what the tool produced, and what the researcher did with it.
 {: .lede}
 
 </div>

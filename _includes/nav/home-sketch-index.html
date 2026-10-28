@@ -21,6 +21,8 @@
         Defaults to "/research/" — the same pair nav/home-tag-cloud
         draws from. A folder listed here needs a matching
         accent class in the "Home sketch index" block of cards.css.
+        Each group is labeled with the title of the folder's index page,
+        falling back to the folder name.
 
   Front matter each row reads:
     title       — the row label (required)
@@ -41,10 +43,13 @@
 
     {% if section_pages.size > 0 %}
     {% assign section_slug = section_dir | replace: "/", "" %}
+    {% assign section_index = site.pages | where: "url", section_dir | first %}
+    {% capture section_label %}{{ section_slug | capitalize }}{% endcapture %}
+    {% if section_index.title %}{% assign section_label = section_index.title %}{% endif %}
     <div class="home-index__group {{ section_slug }}">
       <div class="home-index__head">
-        <a class="home-index__section" href="{{ section_dir | relative_url }}">{{ section_slug | capitalize }}</a>
-        <span class="home-index__count">{{ section_pages.size }} {% if section_pages.size == 1 %}sketch{% else %}sketches{% endif %}</span>
+        <a class="home-index__section" href="{{ section_dir | relative_url }}">{{ section_label }}</a>
+        <span class="home-index__count">{{ section_pages.size }} {% if section_pages.size == 1 %}jig{% else %}jigs{% endif %}</span>
       </div>
 
       <ul class="home-index__list">

@@ -5,10 +5,11 @@ description: "Experiments with AI in humanities research at UNM: sources, tools,
 wide: true
 container-class: "container sketchbook-container sketchbook-container--home"
 home-cards:
-  - title: Research
+  - title: Browse the jigs
     class: research
     href: /research/
     text: "Experiments with sources, research tools, methods, and writing."
+    go: "See every jig →"
 ---
 
 # AI Workbench
@@ -18,9 +19,11 @@ home-cards:
 AI Workbench collects experiments with AI in humanities research at UNM. Each account starts with a particular task: transcribing a manuscript, getting references into Zotero, locating a photograph, checking a draft, or building a model. We describe what we tried, what came out, and what still needed a researcher's judgment.
 {: .lede}
 
+We call each experiment a *jig*. In a woodshop, a jig is a guide built for one job: it holds the work and guides the tool so the same cut can be made again. A jig here does that for one research task, recording the sources, tools, prompts, and steps that went into it.
+
 A useful output and a reliable source are different things. The workbench makes room for partial results, failed attempts, and decisions to leave AI out of a workflow. The point is to give colleagues enough detail to try an approach and assess its limits.
 
-For classroom activities, assignments, and course policies, visit [AI Sketchbook](https://amaranth.unm.edu/ai-sketchbook/).
+For classroom activities and assignments, visit [AI Sketchbook](https://amaranth.unm.edu/ai-sketchbook/).
 
 </div>
 

@@ -68,4 +68,4 @@ The bibliography gave me a starting point, and the response to my framing gave m
 
 Checking the citations was part of that work. Asking for ISBNs and DOIs made the entries easier to follow up; the identifiers alone could not tell me whether the annotations represented the scholarship well. This result doesn't establish that higher-tier models reliably produce accurate bibliographies on other topics. It does suggest a way to begin exploring a topic while keeping the source checking in the researcher's hands.
 
-A separate sketch compares [two models answering a question about Huizinga](model-tiers.html).
+A separate jig compares [two models answering a question about Huizinga](model-tiers.html).
